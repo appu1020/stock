@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="fw-bold">Your Wishlist</h2>
+
+    <!-- Display Messages -->
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} text-center">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Stock Symbol</th>
+                <th>Current Price (USD)</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for stock in wishlist_stocks %}
+            <tr>
+                <td>{{ stock.symbol }}</td>
+                <td>
+                    {% if stock.current_price == "N/A" %}
+                        <span class="text-warning">Price Unavailable</span>
+                    {% else %}
+                        ${{ stock.current_price }}
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{% url 'dashboard' %}?symbol={{ stock.symbol }}" class="btn btn-primary btn-sm">
+                        View Stock
+                    </a>
+
+                    <!-- Remove from Wishlist -->
+                    <form method="POST" action="{% url 'remove_from_wishlist' stock.symbol %}" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+                    </form>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3" class="text-center">No stocks in your wishlist.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

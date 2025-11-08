@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{%block title %}
+Market
+{%endblock%}
+
+{%block content %}
+<h1 class="m-5 my-1 fw-bold">Market Overview</h1>
+<div class="container-fluid mx-5">
+    <div class="row">
+        {% for stock in indian_stocks %}
+    <div class="col-3 bg-white m-1">
+        <h2>{{ stock.Symbol }}</h2>
+        <p>{{ stock.Name }}</p>
+        <p>Price: ₹{{ stock.Price }}</p>
+    </div>
+{% endfor %}
+    </div>
+</div>
+<table class="shadow-md rounded-lg overflow-hidden w-100 m-4">
+    <thead>
+        <tr class="bg-gray-100">
+            <th class="p-4">Symbol</th>
+            <th class="p-4">Name</th>
+            <th class="p-4">Price Change</th>
+            <th class="p-4">Avg Vol (3M)</th>
+            <th class="p-4">Market Cap</th>
+        </tr>
+    </thead>
+    <tbody id="stockTable">
+        {% for stock in stock_data %}
+
+        <tr>
+            <td class="px-4 py-1">{{ stock.Symbol }}</td>
+            <td class="px-4">{{ stock.Name }}</td>
+            <td class="px-4">${{ stock.Change }}</td>
+            <td class="px-4">{{stock.Avg_Vol}}</td>
+            <td class="px-4">{{stock.Market_Cap}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{%endblock%}

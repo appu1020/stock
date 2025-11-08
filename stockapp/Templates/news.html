@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{%block title %}
+Stock news
+{%endblock%}
+
+{%block content %}
+<div class="search-bar m-5 mt-3">
+
+    <h2 class="fw-bold">Latest Stock Market News</h2>
+    <div class="news-container">
+        {% for news in news_data %}
+        <div class="news-item bg-white p-3 mb-2">
+            <h3 class=""><a href="{{ news.link }}" target="_blank">{{ news.title }}</a></h3>
+            <p>{{ news.source_id }} | {{ news.pubDate }}</p>
+            <p>{{ news.description }}</p>
+        </div>
+        {% empty %}
+        <p>No news available.</p>
+        {% endfor %}
+    </div>
+</div>
+
+{%endblock%}

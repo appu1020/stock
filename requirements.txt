@@ -1,0 +1,11 @@
+django
+yfinance 
+numpy 
+pandas 
+matplotlib 
+scikit-learn 
+tensorflow 
+keras 
+statsmodel
+yahoo_fin
+plotly
