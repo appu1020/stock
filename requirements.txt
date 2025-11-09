@@ -6,6 +6,6 @@ matplotlib
 scikit-learn 
 tensorflow 
 keras 
-statsmodel
+statsmodels
 yahoo_fin
 plotly
